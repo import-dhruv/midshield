@@ -70,7 +70,9 @@ def detector(text: str) -> dict:
     
     #Layer 1 : Rule based regex matching (instant, zero latency)
     lower_text = text.lower()
-    rule_triggered = any(re.search(pattern, lower_text) for pattern in PATTERNS)
+    # Flatten all patterns from all categories
+    all_patterns = [pattern for category in INJECTION_PATTERNS.values() for pattern in category]
+    rule_triggered = any(re.search(pattern, text) for pattern in all_patterns)
     
     #Layer 2: Groq LLM semantic classification
     llm_risk = "safe"
