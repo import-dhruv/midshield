@@ -55,5 +55,8 @@ Thumbs.db
 # Streamlit
 .streamlit/secrets.toml
 
+# UV/uv lock file (causes issues with Streamlit Cloud)
+uv.lock
+
 # Deployment (keep config files)
 # These are intentionally NOT ignored as they're needed for deployment
