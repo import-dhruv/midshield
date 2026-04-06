@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 from typing import Literal, Optional
 import os
@@ -7,6 +8,15 @@ import json
 from detector import detector
 
 app = FastAPI(title="MidShield API", version="1.0")
+
+# CORS middleware for frontend access
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Configure this for production
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 #Pydantic models for request/response validation
 class DetectionRequest(BaseModel):
